@@ -1,0 +1,22 @@
+﻿@using Bloonsor.BlazorApp.Models
+
+@if (Model is not null)
+{
+    <img style="position:absolute;top:@(Model.PositionTop)px;left:@(Model.PositionLeft)px;" 
+         src="@Model.ImageUrl" 
+         @onclick="BalloonClicked"/>
+}
+
+@code {
+
+    [Parameter]
+    public BalloonViewModel? Model { get; set; }
+
+    [Parameter]
+    public EventCallback<BalloonViewModel> OnPopped { get; set; }
+
+    private void BalloonClicked()
+    {
+        OnPopped.InvokeAsync(Model);
+    }
+}
